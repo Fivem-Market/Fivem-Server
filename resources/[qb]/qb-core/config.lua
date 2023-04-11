@@ -1,0 +1,35 @@
+QBConfig = {}
+
+QBConfig.MaxPlayers = GetConvarInt('sv_maxclients', 48) -- Gets max players from config file, default 48
+QBConfig.DefaultSpawn = vector4(-1035.71, -2731.87, 12.86, 0.0)
+QBConfig.UpdateInterval = 1 -- how often to update player data in minutes
+QBConfig.StatusInterval = 5000 -- how often to check hunger/thirst status in ms
+
+QBConfig.Money = {}
+QBConfig.Money.MoneyTypes = { ['money'] = 200, ['marked_money'] = 0 }
+QBConfig.Money.DontAllowMinus = { 'money', 'marked_money' } -- Money that is not allowed going in minus
+
+QBConfig.Player = {}
+QBConfig.Player.HungerRate = 1.6 -- Rate at which hunger goes down.
+QBConfig.Player.ThirstRate = 2.2 -- Rate at which thirst goes down.
+QBConfig.Player.AlcoholRate = 3.8 -- Rate at which thirst goes down.
+QBConfig.Player.DrugRate = 2.1 -- Rate at which thirst goes down.
+QBConfig.Player.Bloodtypes = {
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "AB+",
+    "AB-",
+    "O+",
+    "O-",
+}
+
+QBConfig.Server = {} -- General server config
+QBConfig.Server.closed = false -- Set server closed (no one can join except people with ace permission 'qbadmin.join')
+QBConfig.Server.closedReason = "Serveur en developpement" -- Reason message to display when people can't join the server
+QBConfig.Server.uptime = 0 -- Time the server has been up.
+QBConfig.Server.whitelist = false -- Enable or disable whitelist on the server
+QBConfig.Server.pvp = true -- Enable or disable pvp on the server (Ability to shoot other players)
+QBConfig.Server.discord = "" -- Discord invite link
+QBConfig.Server.PermissionList = {} -- permission list
