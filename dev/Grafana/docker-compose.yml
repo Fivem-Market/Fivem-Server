@@ -1,0 +1,98 @@
+version: "3"
+
+volumes: 
+  logs:
+
+services:
+  #
+  # Read logs from files and ingest into Loki.
+  #
+  promtail:
+    #image: grafana/promtail:2.3.0
+    image: grafana/promtail:latest
+    volumes:
+      - logs:/logs/
+      - ./config:/mnt/config
+      - ./data/promtail:/mnt/var
+      - /var/log:/var/log
+    command: -config.file=/mnt/config/promtail-config-docker.yaml
+    ports:
+      - "9081:9080"
+    restart: "always"
+
+  #
+  # The Loki database for storing logs.
+  #
+  loki:
+    #image: grafana/loki:2.3.0
+    #image: grafana/loki:2.6.1
+    image: grafana/loki:latest
+    user: root
+    volumes:
+      - ./config:/mnt/config
+      - ./data/loki-data:/tmp/loki
+      - ./data/loki-wal:/tmp/wal
+    command: -config.file=/mnt/config/loki-config.yaml
+    ports:
+      - "3100:3100"
+    restart: "always"
+
+  #
+  # Prometheus
+  #
+  prometheus:
+    image: prom/prometheus
+    #
+    # Not thrilled with having to run as root in the container, but trying
+    # to run this in a Linux VM has permission issues, since Docker commands
+    # are normally run as root...
+    #
+    user: root
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./data/prometheus:/prometheus
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: "always"
+
+
+  #
+  # Grafana, for viewing via the UI.
+  #
+  grafana:
+    image: grafana/grafana:latest
+    # Running this as root for the same reason Prometheus is running as root.
+    user: root
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+        - name: Loki
+          type: loki
+          access: proxy 
+          orgId: 1
+          url: http://loki:3100
+          basicAuth: false
+          isDefault: true
+          version: 1
+          editable: false
+        - name: prometheus
+          access: proxy
+          type: prometheus
+          url: http://prometheus:9090
+          isDefault: false
+          orgId: 1
+          editable: false
+          jsonData:
+            timeInterval: 10s
+        EOF
+        /run.sh
+    restart: "always"
