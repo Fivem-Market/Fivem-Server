@@ -8,7 +8,7 @@
 -- Description: FiveM menu library for creating menu's
 ----------------------- [ MenuV ] -----------------------
 MVconfig = {
-    Language = 'fr',
+    Language = 'da',
     HideInterval = 250,
     Sounds = {
         UP = {

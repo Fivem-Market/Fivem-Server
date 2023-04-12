@@ -6,15 +6,15 @@ The server is using a lot of resources, some of them are written by us, some of 
 ## Actual plan
 
 We started this server by using `qb-core` as a base for our modules and resources. But over time we were not happy with the way the server was working and
-we decided to start our new features with a base of our own into the `soz-core` resource.
+we decided to start our new features with a base of our own into the `op-core` resource.
 
-Any new feature that we want to add to the server will be added to the `soz-core` resource, and we are slowly moving all other resources and features into this one.
+Any new feature that we want to add to the server will be added to the `op-core` resource, and we are slowly moving all other resources and features into this one.
 
 Only bug fixes and **very small features** will be added to the other resources.
 
 ## Directory structure
 
-In the long term everything will be in the `soz-core` or `soz-phone` resource (except for maps, vehicles or others graphics assets), but for now we have a lot of resources that are not part of the `soz-core` resource:
+In the long term everything will be in the `op-core` or `op-phone` resource (except for maps, vehicles or others graphics assets), but for now we have a lot of resources that are not part of the `op-core` resource:
 
  * `lib/` contains the code that is used to develop and compile some resources for the server, it only contains the `menuv` library and will be removed in the future
  * `resources/` contains all the resources that are used by the server
@@ -24,7 +24,7 @@ In the long term everything will be in the `soz-core` or `soz-phone` resource (e
    * `[mapping]` contains specific mapping for this server
    * `[props]` contains specific objects / props for this server
    * `[qb]` qb-core resources, those resources will be removed in the future
-   * `[soz]` contains the resources developed by our team and used by the server
+   * `[op]` contains the resources developed by our team and used by the server
    * `[vanilla]` when only using modules inside this folder: allow to run the server without any custom resources, it's only used for testing purpose
    * `[vehicles]` contains specific vehicles for this server
    * `[weapons]` contains specific weapon configuration and sound for this server

@@ -198,7 +198,7 @@ end
 function QBCore.Functions.Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
     exports['progressbar']:Progress({
         name = name:lower(),
-        duration = exports["soz-upw"]:CalculateDuration(duration),
+        duration = exports["op-upw"]:CalculateDuration(duration),
         label = label,
         useWhileDead = useWhileDead,
         canCancel = canCancel,

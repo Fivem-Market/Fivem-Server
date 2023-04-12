@@ -13,7 +13,7 @@ local hasPlayerLoaded = false
 Citizen.CreateThread(function()
 	Wait(5000)
 	hasPlayerLoaded = true
-    TriggerServerEvent('soz-core:server:sound:init')
+    TriggerServerEvent('op-core:server:sound:init')
 end)
 ------
 -- RegisterNetEvent LIFE_CL:Sound:PlayOnOne

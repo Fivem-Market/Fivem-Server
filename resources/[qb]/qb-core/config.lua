@@ -27,7 +27,7 @@ QBConfig.Player.Bloodtypes = {
 
 QBConfig.Server = {} -- General server config
 QBConfig.Server.closed = false -- Set server closed (no one can join except people with ace permission 'qbadmin.join')
-QBConfig.Server.closedReason = "Serveur en developpement" -- Reason message to display when people can't join the server
+QBConfig.Server.closedReason = "Server under udvikling" -- Reason message to display when people can't join the server
 QBConfig.Server.uptime = 0 -- Time the server has been up.
 QBConfig.Server.whitelist = false -- Enable or disable whitelist on the server
 QBConfig.Server.pvp = true -- Enable or disable pvp on the server (Ability to shoot other players)

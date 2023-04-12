@@ -2105,7 +2105,7 @@ QBShared.Items = {
     },
     ['sausage4'] = {
         ['name'] = 'sausage4',
-        ['label'] = 'Soziflard',
+        ['label'] = 'opiflard',
         ['weight'] = 300,
         ['type'] = 'food',
         ['unique'] = false,
@@ -3752,7 +3752,7 @@ QBShared.Items = {
         ['useable'] = true,
         ['shouldClose'] = true,
         ['combinable'] = nil,
-        ['description'] = 'Bienvenue sur SOZ !',
+        ['description'] = 'Bienvenue sur op !',
         ['illustrator'] = '.Kutz',
     },
     ['health_book'] = {

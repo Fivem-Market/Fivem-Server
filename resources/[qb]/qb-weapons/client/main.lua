@@ -41,7 +41,7 @@ CreateThread(function()
                     else
                         if weapon ~= -1569615261 then
                             TriggerEvent('inventory:client:CheckWeapon', QBCore.Shared.Weapons[weapon]["name"])
-                            exports["soz-hud"]:DrawNotification("Cette arme n'est plus utilisable", "error")
+                            exports["op-hud"]:DrawNotification("Dette våben kan ikke længere anvendes", "error")
                             MultiplierAmount = 0
                         end
                     end

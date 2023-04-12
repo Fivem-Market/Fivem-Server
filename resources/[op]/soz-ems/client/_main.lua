@@ -1,0 +1,55 @@
+QBCore = exports["qb-core"]:GetCoreObject()
+opJobCore = exports["op-jobs"]:GetCoreObject()
+
+PlayerData = QBCore.Functions.GetPlayerData()
+
+RegisterNetEvent("QBCore:Client:OnPlayerLoaded", function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    QBCore.Functions.CreateBlip("LSMC", {
+        name = "Los Santos Medical Center",
+        coords = vector3(356.35, -1416.63, 32.51),
+        sprite = 61,
+        scale = 1.0,
+    })
+end)
+
+RegisterNetEvent("QBCore:Player:SetPlayerData", function(data)
+    PlayerData = data
+end)
+
+RegisterNetEvent("QBCore:Client:OnJobUpdate", function(JobInfo)
+    PlayerData.job = JobInfo
+end)
+
+RegisterNetEvent("op_ems:client:KillPlayer")
+AddEventHandler("op_ems:client:KillPlayer", function()
+    SetEntityHealth(PlayerPedId(), 0)
+end)
+
+RegisterNetEvent("lsmc:client:GiveBlood")
+AddEventHandler("lsmc:client:GiveBlood", function()
+    local player = PlayerPedId()
+
+    TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", PlayerData.metadata["hunger"] - 20)
+    TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", PlayerData.metadata["thirst"] - 20)
+
+    exports["op-hud"]:DrawNotification("Vous avez ~g~donné~s~ votre sang !")
+end)
+
+RegisterNetEvent("lsmc:client:ifaks")
+AddEventHandler("lsmc:client:ifaks", function()
+    local player = PlayerPedId()
+    SetEntityHealth(player, GetEntityHealth(player) + 25)
+    TriggerEvent("op-core:client:player:refresh-walk-style")
+end)
+
+RegisterNetEvent("lsmc:client:heal")
+AddEventHandler("lsmc:client:heal", function(disease)
+    local player = PlayerPedId()
+    SetEntityHealth(player, GetEntityHealth(player) + 25)
+    if disease == "grippe" then
+        TriggerServerEvent("op-core:server:server:set-current-disease", false)
+        exports["op-hud"]:DrawNotification("Vous êtes guéri!")
+    end
+    TriggerEvent("op-core:client:player:refresh-walk-style")
+end)

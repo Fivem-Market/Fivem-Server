@@ -22,8 +22,8 @@ function QBCore.Functions.GetIdentifier(source, idtype)
     return nil
 end
 
-function QBCore.Functions.GetSozIdentifier(source)
-    if GetConvar("soz_disable_steam_credential", "false") == "true" then
+function QBCore.Functions.GetopIdentifier(source)
+    if GetConvar("op_disable_steam_credential", "false") == "true" then
         return QBCore.Functions.GetIdentifier(source, 'license')
     end
 
@@ -40,13 +40,13 @@ end
 
 -- This is the default function for getting a player account, change this method to do your own auth system
 function QBCore.Functions.GetUserAccount(source)
-    local steam = QBCore.Functions.GetSozIdentifier(source)
+    local steam = QBCore.Functions.GetopIdentifier(source)
 
     local status, result = pcall(function()
         local p = promise.new()
         local resolved = false
 
-        MySQL.single("SELECT a.* FROM soz_api.accounts a LEFT JOIN soz_api.account_identities ai ON a.id = ai.accountId WHERE a.whitelistStatus = 'ACCEPTED' AND ai.identityType = 'STEAM' AND ai.identityId = ? LIMIT 1", {steam}, function(result)
+        MySQL.single("SELECT a.* FROM op_api.accounts a LEFT JOIN op_api.account_identities ai ON a.id = ai.accountId WHERE a.whitelistStatus = 'ACCEPTED' AND ai.identityType = 'STEAM' AND ai.identityId = ? LIMIT 1", {steam}, function(result)
             if resolved then
                 return
             end
@@ -65,7 +65,7 @@ function QBCore.Functions.GetUserAccount(source)
     end)
 
     if not status or not result then
-        exports["soz-monitor"]:Log("ERROR", "cannot find account for this user: '" .. json.encode(result) .. "'", {
+        exports["op-monitor"]:Log("ERROR", "cannot find account for this user: '" .. json.encode(result) .. "'", {
             steam = steam,
         })
 
@@ -183,7 +183,7 @@ end
 --- Will set the provided player id / source into the provided bucket id
 function QBCore.Functions.SetPlayerBucket(player_source --[[int]],bucket --[[int]])
     if player_source and bucket then
-        local plicense = QBCore.Functions.GetSozIdentifier(player_source)
+        local plicense = QBCore.Functions.GetopIdentifier(player_source)
         SetPlayerRoutingBucket(player_source, bucket)
         _G.Player_Buckets[plicense] = {player_id = player_source, player_bucket = bucket}
         return true
@@ -277,7 +277,7 @@ end
 function QBCore.Functions.UseItem(source, item)
     local src = source
     QBCore.UseableItems[item.name](src, item)
-    TriggerClientEvent('soz-core:client:item:use', src, item.name, QBCore.Shared.Items[item.name])
+    TriggerClientEvent('op-core:client:item:use', src, item.name, QBCore.Shared.Items[item.name])
 end
 
 -- Kick Player
@@ -328,7 +328,7 @@ end
 
 function QBCore.Functions.HasPermission(source, _permission)
     local src = source
-    local license = QBCore.Functions.GetSozIdentifier(src)
+    local license = QBCore.Functions.GetopIdentifier(src)
     local permission = tostring(_permission:lower())
 
     if permission == 'user' then
@@ -356,7 +356,7 @@ end
 
 function QBCore.Functions.GetPermission(source)
     local src = source
-    local license = QBCore.Functions.GetSozIdentifier(src)
+    local license = QBCore.Functions.GetopIdentifier(src)
     if license then
         if QBCore.Config.Server.PermissionList[license] then
             if QBCore.Config.Server.PermissionList[license].license == license then
@@ -371,7 +371,7 @@ end
 
 function QBCore.Functions.IsOptin(source)
     local src = source
-    local license = QBCore.Functions.GetSozIdentifier(src)
+    local license = QBCore.Functions.GetopIdentifier(src)
     if QBCore.Functions.HasPermission(src, 'admin') then
         return QBCore.Config.Server.PermissionList[license].optin
     end
@@ -379,7 +379,7 @@ end
 
 function QBCore.Functions.ToggleOptin(source)
     local src = source
-    local license = QBCore.Functions.GetSozIdentifier(src)
+    local license = QBCore.Functions.GetopIdentifier(src)
     if QBCore.Functions.HasPermission(src, 'admin') then
         QBCore.Config.Server.PermissionList[license].optin = not QBCore.Config.Server.PermissionList[license].optin
     end

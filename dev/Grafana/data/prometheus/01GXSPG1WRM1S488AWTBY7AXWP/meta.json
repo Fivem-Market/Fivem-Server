@@ -1,0 +1,17 @@
+{
+	"ulid": "01GXSPG1WRM1S488AWTBY7AXWP",
+	"minTime": 1681257606269,
+	"maxTime": 1681264800000,
+	"stats": {
+		"numSamples": 1297925,
+		"numSeries": 2773,
+		"numChunks": 10423
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01GXSPG1WRM1S488AWTBY7AXWP"
+		]
+	},
+	"version": 1
+}

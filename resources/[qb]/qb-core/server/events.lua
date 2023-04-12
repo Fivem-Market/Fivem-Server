@@ -4,7 +4,7 @@ AddEventHandler('playerDropped', function()
     local src = source
     if QBCore.Players[src] then
         local Player = QBCore.Players[src]
-        exports['soz-monitor']:Event('player_disconnect', { player_source = src }, {})
+        exports['op-monitor']:Event('player_disconnect', { player_source = src }, {})
         Player.Functions.Save()
         _G.Player_Buckets[Player.PlayerData.license] = nil
         TriggerEvent('inventory:DropPlayerInventory', src)
@@ -44,15 +44,15 @@ local function OnPlayerConnecting(name, setKickReason, deferrals)
     -- @TODO we will validate in another way using steam and a specific queue system, bypass this code ATM
     deferrals.defer()
     local src = source
-    local steam = QBCore.Functions.GetSozIdentifier(src)
+    local steam = QBCore.Functions.GetopIdentifier(src)
 
     Wait(0)
 
-    local allowAnonymous = GetConvar("soz_allow_anonymous_login", "false") == "true"
-    local defaultAnonymousRole = GetConvar("soz_anonymous_default_role", "user")
+    local allowAnonymous = GetConvar("op_allow_anonymous_login", "false") == "true"
+    local defaultAnonymousRole = GetConvar("op_anonymous_default_role", "user")
 
     if not steam then
-        exports["soz-monitor"]:Log("ERROR", name .. ": error finding steam id for this user.", {
+        exports["op-monitor"]:Log("ERROR", name .. ": error finding steam id for this user.", {
             event = "playerConnecting"
         })
 
@@ -67,7 +67,7 @@ local function OnPlayerConnecting(name, setKickReason, deferrals)
 
     if not account then
         if not allowAnonymous then
-            deferrals.done('Impossible de recupérer un compte soz valide, veuillez vous rapprocher auprès d\'un administrateur, identifiant steam : ' .. tostring(steam))
+            deferrals.done('Impossible de recupérer un compte op valide, veuillez vous rapprocher auprès d\'un administrateur, identifiant steam : ' .. tostring(steam))
 
             return
         end
@@ -163,8 +163,8 @@ end)
 -- Items
 RegisterNetEvent('QBCore:Server:RemoveItem', function(itemName, amount, slot)
     local Player = QBCore.Functions.GetPlayer(source)
-    exports['soz-monitor']:Log('FATAL', 'DEPRECATED use of QBCore:Server:RemoveItem ! item: '.. itemName, Player)
-    exports['soz-inventory']:RemoveItem(Player.PlayerData.source, itemName, amount, false, slot)
+    exports['op-monitor']:Log('FATAL', 'DEPRECATED use of QBCore:Server:RemoveItem ! item: '.. itemName, Player)
+    exports['op-inventory']:RemoveItem(Player.PlayerData.source, itemName, amount, false, slot)
 end)
 
 -- Non-Chat Command Calling (ex: qb-adminmenu)

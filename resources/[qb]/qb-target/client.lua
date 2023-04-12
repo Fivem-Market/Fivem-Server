@@ -973,7 +973,7 @@ RegisterNUICallback('selectTarget', function(option, cb)
 			Wait(0)
 
 			if data.blackoutGlobal then
-				exports["soz-phone"]:stopPhoneCall()
+				exports["op-phone"]:stopPhoneCall()
 			end
 
 			if data.action then

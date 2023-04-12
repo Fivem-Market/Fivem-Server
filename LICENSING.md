@@ -2,7 +2,7 @@
 
 Only the code in the following directories are licensed under the [MIT license](LICENSE.md):
 
- * `resources/[soz]/`
+ * `resources/[op]/`
  * `resources/[mapping]/`
  * `resources/[props]/`
  * `resources/[vehicles]/`

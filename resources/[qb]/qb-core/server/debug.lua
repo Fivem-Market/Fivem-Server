@@ -36,9 +36,9 @@ function QBCore.Debug(table, indent)
 end
 
 function QBCore.ShowError(resource, msg)
-    exports['soz-monitor']:Log('ERROR', msg, { resource = resource })
+    exports['op-monitor']:Log('ERROR', msg, { resource = resource })
 end
 
 function QBCore.ShowSuccess(resource, msg)
-    exports['soz-monitor']:Log('INFO', msg, { resource = resource })
+    exports['op-monitor']:Log('INFO', msg, { resource = resource })
 end

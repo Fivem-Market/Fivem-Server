@@ -9,10 +9,10 @@ function QBCore.Player.Login(source, citizenid, newData)
     local src = source
     if src then
         if citizenid then
-            local license = QBCore.Functions.GetSozIdentifier(src)
+            local license = QBCore.Functions.GetopIdentifier(src)
             local PlayerData = exports.oxmysql:singleSync('SELECT * FROM player where citizenid = ?', { citizenid })
             local apartment = exports.oxmysql:singleSync('SELECT id,property_id,label,price,owner,tier,has_parking_place FROM housing_apartment where ? IN (owner, roommate)', { citizenid })
-            local role = GetConvar("soz_anonymous_default_role", "user")
+            local role = GetConvar("op_anonymous_default_role", "user")
             local account = QBCore.Functions.GetUserAccount(src)
 
             if account then
@@ -63,7 +63,7 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     PlayerData.source = src
     PlayerData.is_default = PlayerData.is_default or 1
     PlayerData.citizenid = PlayerData.citizenid or QBCore.Player.CreateCitizenId()
-    PlayerData.license = PlayerData.license or QBCore.Functions.GetSozIdentifier(src)
+    PlayerData.license = PlayerData.license or QBCore.Functions.GetopIdentifier(src)
     PlayerData.name = GetPlayerName(src)
     PlayerData.cid = PlayerData.cid or 1
     PlayerData.money = PlayerData.money or {}
@@ -399,14 +399,14 @@ function QBCore.Player.CreatePlayer(PlayerData)
     end
 
     self.Functions.RemoveItem = function(item, amount, slot)
-        return exports['soz-inventory']:RemoveItem(self.PlayerData.source, item, amount, false, slot)
+        return exports['op-inventory']:RemoveItem(self.PlayerData.source, item, amount, false, slot)
     end
 
     self.Functions.SetInventory = function(items, dontUpdateChat)
         self.PlayerData.items = items
         self.Functions.UpdatePlayerData(dontUpdateChat)
 
-        exports['soz-monitor']:Log('TRACE', 'Inventory movement - Set ! items set: ' .. json.encode(items), { player = self.PlayerData })
+        exports['op-monitor']:Log('TRACE', 'Inventory movement - Set ! items set: ' .. json.encode(items), { player = self.PlayerData })
     end
 
     self.Functions.SetSkin = function(skin, skipApply)
@@ -414,10 +414,10 @@ function QBCore.Player.CreatePlayer(PlayerData)
         self.Functions.UpdatePlayerData(true)
 
         if not skipApply then
-            TriggerClientEvent("soz-character:Client:ApplyCurrentSkin", self.PlayerData.source)
+            TriggerClientEvent("op-character:Client:ApplyCurrentSkin", self.PlayerData.source)
         end
 
-        exports['soz-monitor']:Log('TRACE', 'Update player skin ' .. json.encode(skin), { player = self.PlayerData })
+        exports['op-monitor']:Log('TRACE', 'Update player skin ' .. json.encode(skin), { player = self.PlayerData })
     end
 
     self.Functions.UpdateMaxWeight = function()
@@ -445,9 +445,9 @@ function QBCore.Player.CreatePlayer(PlayerData)
         end
 
         if (baseBag == 0 and jobBag == 0) or ((baseBag ~= 0 or jobBag ~= 0) and self.PlayerData.cloth_config.Config.HideBag) then
-            exports["soz-inventory"]:SetMaxWeight(self.PlayerData.source, math.floor(baseWeight))
+            exports["op-inventory"]:SetMaxWeight(self.PlayerData.source, math.floor(baseWeight))
         else
-            exports["soz-inventory"]:SetMaxWeight(self.PlayerData.source, math.floor(baseWeight + 40000))
+            exports["op-inventory"]:SetMaxWeight(self.PlayerData.source, math.floor(baseWeight + 40000))
         end
     end
 
@@ -482,13 +482,13 @@ function QBCore.Player.CreatePlayer(PlayerData)
         self.Functions.UpdateArmour()
 
         if not skipApply then
-            TriggerClientEvent("soz-character:Client:ApplyCurrentClothConfig", self.PlayerData.source)
+            TriggerClientEvent("op-character:Client:ApplyCurrentClothConfig", self.PlayerData.source)
             if Player(self.PlayerData.source).state.isWearingPatientOutfit then
                 Player(self.PlayerData.source).state.isWearingPatientOutfit = false
             end
         end
 
-        exports['soz-monitor']:Log('TRACE', 'Update player cloth config ' .. json.encode(config), { player = self.PlayerData })
+        exports['op-monitor']:Log('TRACE', 'Update player cloth config ' .. json.encode(config), { player = self.PlayerData })
     end
 
     self.Functions.GetItemByName = function(item)
@@ -576,7 +576,7 @@ function QBCore.Player.CreatePlayer(PlayerData)
     end
 
     QBCore.Players[self.PlayerData.source] = self
-    exports['soz-inventory']:CreatePlayerInventory(self.PlayerData)
+    exports['op-inventory']:CreatePlayerInventory(self.PlayerData)
 
     -- At this point we are safe to emit new instance to third party resource for load handling
     TriggerEvent('QBCore:Server:PlayerLoaded', self)
@@ -619,7 +619,7 @@ function QBCore.Player.Save(source)
             features = json.encode(PlayerData.features),
         })
     else
-        exports['soz-monitor']:Log('ERROR', 'Save player error ! PlayerData is empty', { player = PlayerData })
+        exports['op-monitor']:Log('ERROR', 'Save player error ! PlayerData is empty', { player = PlayerData })
     end
 end
 
@@ -643,16 +643,16 @@ local playertables = { -- Add tables as needed
 
 function QBCore.Player.DeleteCharacter(source, citizenid)
     local src = source
-    local license = QBCore.Functions.GetSozIdentifier(src)
+    local license = QBCore.Functions.GetopIdentifier(src)
     local result = exports.oxmysql:scalarSync('SELECT license FROM player where citizenid = ?', { citizenid })
     if license == result then
         for k, v in pairs(playertables) do
             exports.oxmysql:execute('DELETE FROM ' .. v.table .. ' WHERE citizenid = ?', { citizenid })
         end
-        exports['soz-monitor']:Log('WARN', 'Character Deleted ! deleted' .. citizenid, { steam = license })
+        exports['op-monitor']:Log('WARN', 'Character Deleted ! deleted' .. citizenid, { steam = license })
     else
         DropPlayer(src, 'You Have Been Kicked For Exploitation')
-        exports['soz-monitor']:Log('WARN', 'Anti-Cheat ! Player has Been Dropped For Character Deletion Exploit', { steam = license })
+        exports['op-monitor']:Log('WARN', 'Anti-Cheat ! Player has Been Dropped For Character Deletion Exploit', { steam = license })
     end
 end
 

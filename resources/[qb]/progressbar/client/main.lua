@@ -95,7 +95,7 @@ function Process(action, start, tick, finish)
 
                     if Action.canCancel then
                         BeginTextCommandDisplayHelp("STRING")
-                        AddTextComponentSubstringPlayerName('Appuyez sur ~INPUT_FRONTEND_RRIGHT~ ou ~INPUT_CURSOR_CANCEL~ pour annuler')
+                        AddTextComponentSubstringPlayerName('Tryk på ~INPUT_FRONTEND_RRIGHT~ eller ~INPUT_CURSOR_CANCEL~ for at annullere')
                         EndTextCommandDisplayHelp(0, false, false, -1)
                         if IsControlJustPressed(0, 194) or IsControlJustPressed(0, 238) then
                             TriggerEvent("progressbar:client:cancel")
@@ -112,10 +112,10 @@ function Process(action, start, tick, finish)
                 end
             end)
         else
-            TriggerEvent("hud:client:DrawNotification", "Une action est déjà en cours !", "error")
+            TriggerEvent("hud:client:DrawNotification", "Der er allerede taget skridt til handling! (WIP)", "error")
         end
     else
-        TriggerEvent("hud:client:DrawNotification", "Vous ne pouvez réaliser cette action !", "error")
+        TriggerEvent("hud:client:DrawNotification", "Du kan ikke udføre denne handling!", "error")
     end
 end
 

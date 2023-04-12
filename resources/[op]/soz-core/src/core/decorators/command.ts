@@ -1,0 +1,32 @@
+import { opRole } from '../permissions';
+import { setMethodMetadata } from './reflect';
+
+export type CommandMetadata = {
+    name: string;
+    description: string;
+    role: opRole[] | opRole | null;
+    keys: CommandKey[];
+};
+
+export type CommandKey = {
+    mapper: 'keyboard' | 'mouse';
+    key: string;
+};
+
+export const CommandMetadataKey = 'op_core.decorator.command';
+
+export const Command = (name: string, options: Partial<Omit<CommandMetadata, 'name'>> = {}): MethodDecorator => {
+    return (target, propertyKey) => {
+        setMethodMetadata(
+            CommandMetadataKey,
+            {
+                name,
+                description: options.description || null,
+                role: options.role || null,
+                keys: options.keys || [],
+            },
+            target,
+            propertyKey
+        );
+    };
+};

@@ -1,0 +1,22 @@
+{
+    "language": "da",
+    "translators": [
+        {
+            "name": "mrcool1575",
+            "emails": ["contact@oz1tnj.dk"],
+            "github": "https://github.com/mrcool1575"
+        }
+    ],
+    "translations": {
+        "keyboard": "Tastatur",
+        "controller": "Controller",
+        "keybind_key_up": "Op i en menu",
+        "keybind_key_down": "Ned i en menu",
+        "keybind_key_left": "Til venstre i en menu",
+        "keybind_key_right": "Til højre i en menu",
+        "keybind_key_enter": "Bekræft element i menuen",
+        "keybind_key_close": "Lukke en menu",
+        "keybind_key_close_all": "Luk alle menuer",
+        "open_menu": "Åbn menuen '%s' med denne tast"
+    }
+}
