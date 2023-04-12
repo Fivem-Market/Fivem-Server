@@ -68,6 +68,7 @@ All contributors to the project will be notified on a list.
  * MariaDB: to store the data
  * Loki: to store the logs (Optional)
  * Prometheus: to store the metrics (Optional)
+ * SQL Mode: `sql_mode=NO_ENGINE_SUBSTITUTION`
 
 ### Prepare and configure the server
  * Clone the repository: `git clone https://github.com/SOZ-Faut-etre-Sub/SOZ-FiveM-Server.git`
