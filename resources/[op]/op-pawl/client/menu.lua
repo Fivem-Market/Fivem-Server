@@ -1,4 +1,4 @@
-local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_pawl", "op", "pawl:menu")
+local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_pawl", "soz", "pawl:menu")
 
 local displayBlips, displayResellBlip, Blips = false, false, {}
 

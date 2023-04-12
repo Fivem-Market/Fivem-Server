@@ -1,4 +1,4 @@
-local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_upw", "op", "upw:menu")
+local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_upw", "soz", "upw:menu")
 local societyMenuState = {
     ["displayInverter"] = false,
     ["displayJobTerminal"] = false,

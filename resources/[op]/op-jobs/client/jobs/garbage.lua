@@ -1,4 +1,4 @@
-local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_garbage", "op", "garbage:menu")
+local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_garbage", "soz", "garbage:menu")
 local societyMenuState = {["displayCollect"] = false}
 
 local haveGarbageBag, garbageBagProp = false, nil

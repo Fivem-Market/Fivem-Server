@@ -1,4 +1,4 @@
-local houseMenu = MenuV:CreateMenu(nil, "Les habitations !", "menu_habitation", "op", "housing:menu")
+local houseMenu = MenuV:CreateMenu(nil, "Les habitations !", "menu_habitation", "soz", "housing:menu")
 
 Housing.Functions = {}
 

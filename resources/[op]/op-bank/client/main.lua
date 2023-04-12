@@ -1,8 +1,8 @@
 QBCore = exports["qb-core"]:GetCoreObject()
 opJobCore = exports["op-jobs"]:GetCoreObject()
 PlayerData = QBCore.Functions.GetPlayerData()
-local safeStorageMenu = MenuV:CreateMenu(nil, "", "menu_inv_safe", "op", "safe-storage")
-local safeHouseStorageMenu = MenuV:CreateMenu(nil, "", "menu_inventory", "op", "safe-house-storage")
+local safeStorageMenu = MenuV:CreateMenu(nil, "", "menu_inv_safe", "soz", "safe-storage")
+local safeHouseStorageMenu = MenuV:CreateMenu(nil, "", "menu_inventory", "soz", "safe-house-storage")
 local isInsideEntrepriseBankZone = false
 
 local currentBank = {}

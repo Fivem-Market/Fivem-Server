@@ -1,6 +1,6 @@
 FoodJob = {}
 FoodJob.Functions = {}
-FoodJob.Menu = MenuV:CreateMenu(nil, "", "menu_job_food", "op", "food:menu")
+FoodJob.Menu = MenuV:CreateMenu(nil, "", "menu_job_food", "soz", "food:menu")
 FoodJob.Zones = {}
 
 local currentField

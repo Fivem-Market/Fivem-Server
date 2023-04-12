@@ -1,4 +1,4 @@
-local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_news", "op", "news:menu")
+local societyMenu = MenuV:CreateMenu(nil, "", "menu_job_news", "soz", "news:menu")
 local removalObject = {"prop_ld_greenscreen_01", "prop_tv_cam_02", "prop_kino_light_01", "v_ilev_fos_mic"}
 
 --- Targets

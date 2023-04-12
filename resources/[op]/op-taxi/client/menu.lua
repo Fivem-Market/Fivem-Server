@@ -3,7 +3,7 @@ TaxiJob.Functions.Menu = {}
 TaxiJob.Menus = {}
 
 CreateThread(function()
-    TaxiJob.Menus["taxi"] = {menu = MenuV:CreateMenu(nil, "Le transport !", "menu_job_trucker", "op", "taxi:menu")}
+    TaxiJob.Menus["taxi"] = {menu = MenuV:CreateMenu(nil, "Le transport !", "menu_job_trucker", "soz", "taxi:menu")}
 end)
 
 TaxiJob.Functions.Menu.GenerateMenu = function(job, cb)

@@ -3,7 +3,7 @@ QBCore = exports["qb-core"]:GetCoreObject()
 BaunJob = {}
 BaunJob.Functions = {}
 BaunJob.MenuState = {}
-BaunJob.Menu = MenuV:CreateMenu(nil, "", "menu_job_baun", "op", "baun:menu")
+BaunJob.Menu = MenuV:CreateMenu(nil, "", "menu_job_baun", "soz", "baun:menu")
 
 BaunJob.Harvest = {}
 BaunJob.CraftZones = {}

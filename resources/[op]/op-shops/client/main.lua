@@ -1,5 +1,5 @@
 QBCore = exports["qb-core"]:GetCoreObject()
-shopMenu = MenuV:CreateMenu(nil, "", "menu_shop_supermarket", "op", "shops")
+shopMenu = MenuV:CreateMenu(nil, "", "menu_shop_supermarket", "soz", "shops")
 ShopContext, currentShop, currentShopBrand = {}, nil, nil
 
 local ShopLocations = {

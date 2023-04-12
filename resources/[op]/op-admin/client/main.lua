@@ -1,8 +1,8 @@
 QBCore = exports["qb-core"]:GetCoreObject()
 PlayerData = QBCore.Functions.GetPlayerData()
 
-AdminMenu = MenuV:CreateMenu(nil, "", "menu_admin", "op", "admin-panel")
-MapperMenu = MenuV:CreateMenu(nil, "", "menu_mapper", "op", "mapping-panel")
+AdminMenu = MenuV:CreateMenu(nil, "", "menu_admin", "soz", "admin-panel")
+MapperMenu = MenuV:CreateMenu(nil, "", "menu_mapper", "soz", "mapping-panel")
 
 RegisterNetEvent("QBCore:Client:OnPlayerLoaded", function()
     PlayerData = QBCore.Functions.GetPlayerData()

@@ -317,7 +317,7 @@ function CreateMenu(info)
         ---@type string | "'size-100'" | "'size-110'" | "'size-125'" | "'size-150'" | "'size-175'" | "'size-200'"
         Size = U:Ensure(info.Size or info.size, 'size-110'),
         ---@type string
-        Dictionary = U:Ensure(info.Dictionary or info.dictionary, 'soz'),
+        Dictionary = U:Ensure(info.Dictionary or info.dictionary, 'op'),
         ---@type string
         Texture = U:Ensure(info.Texture or info.texture, 'default'),
         ---@type table

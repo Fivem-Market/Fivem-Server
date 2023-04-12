@@ -2,6 +2,11 @@ version: "3"
 
 volumes: 
   logs:
+  grafana:
+  loki-data:
+  loki-wal:
+  prometheus:
+  promtail:
 
 services:
   #
@@ -13,7 +18,7 @@ services:
     volumes:
       - logs:/logs/
       - ./config:/mnt/config
-      - ./data/promtail:/mnt/var
+      - promtail:/mnt/var
       - /var/log:/var/log
     command: -config.file=/mnt/config/promtail-config-docker.yaml
     ports:
@@ -30,8 +35,8 @@ services:
     user: root
     volumes:
       - ./config:/mnt/config
-      - ./data/loki-data:/tmp/loki
-      - ./data/loki-wal:/tmp/wal
+      - loki-data:/tmp/loki
+      - loki-wal:/tmp/wal
     command: -config.file=/mnt/config/loki-config.yaml
     ports:
       - "3100:3100"
@@ -51,7 +56,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./data/prometheus:/prometheus
+      - prometheus:/prometheus
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: "always"
 
@@ -64,7 +69,7 @@ services:
     # Running this as root for the same reason Prometheus is running as root.
     user: root
     volumes:
-      - ./data/grafana:/var/lib/grafana
+      - grafana:/var/lib/grafana
     ports:
       - "3000:3000"
     entrypoint:

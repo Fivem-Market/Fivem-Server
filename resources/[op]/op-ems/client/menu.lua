@@ -3,7 +3,7 @@ EmsJob.Functions.Menu = {}
 EmsJob.Menus = {}
 
 CreateThread(function()
-    EmsJob.Menus["lsmc"] = {menu = MenuV:CreateMenu(nil, "La santé !", "menu_job_lsmc", "op", "lsmc:menu")}
+    EmsJob.Menus["lsmc"] = {menu = MenuV:CreateMenu(nil, "La santé !", "menu_job_lsmc", "soz", "lsmc:menu")}
 end)
 
 local function PropsEntity(menu)

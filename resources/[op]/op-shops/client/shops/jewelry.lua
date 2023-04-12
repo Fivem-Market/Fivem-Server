@@ -106,7 +106,7 @@ function JewelryShop:GenerateMenu()
 end
 
 function JewelryShop:GenerateSubMenu(parentMenu, model, categoryPropIndex, index, subCategoryName, subCategory, items)
-    local subMenu = MenuV:CreateMenu(nil, subCategoryName, "menu_shop_jewelry", "op", "jewelry:cat:" .. model .. ":" .. index .. ":" .. subCategoryName)
+    local subMenu = MenuV:CreateMenu(nil, subCategoryName, "menu_shop_jewelry", "soz", "jewelry:cat:" .. model .. ":" .. index .. ":" .. subCategoryName)
 
     table.sort(items)
     for component, drawables in pairs(items) do
@@ -150,7 +150,7 @@ CreateThread(function()
             local categoryEntry = JewelryShop:getShopProducts()[pedModel][index]
 
             if MenuV:IsNamespaceAvailable("jewelry:cat:" .. pedModel .. ":" .. index) then
-                categoryEntry.menu = MenuV:CreateMenu(nil, category.label, "menu_shop_jewelry", "op", "jewelry:cat:" .. pedModel .. ":" .. index)
+                categoryEntry.menu = MenuV:CreateMenu(nil, category.label, "menu_shop_jewelry", "soz", "jewelry:cat:" .. pedModel .. ":" .. index)
 
                 table.sort(category.items)
                 for itemKey, drawables in pairs(category.items) do
